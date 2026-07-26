@@ -1,0 +1,267 @@
+{% extends "basic.html" %}
+{% load static %}
+
+{% block title %}Student Registration{% endblock %}
+
+{% block body %}
+
+<section class="min-h-screen bg-gradient-to-br from-[#0F172A] via-[#1E3A8A] to-[#60A5FA] py-16">
+
+    <div class="max-w-5xl mx-auto px-6">
+
+        <div class="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl shadow-2xl overflow-hidden">
+
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-[#1E3A8A] to-[#3B82F6] px-10 py-8">
+
+                <h1 class="text-4xl font-bold text-white">
+                    Student Registration
+                </h1>
+
+                <p class="text-blue-100 mt-2">
+                    Create your student account to access the Library Management System.
+                </p>
+
+            </div>
+
+            <!-- Form -->
+
+            <form method="POST" enctype="multipart/form-data" class="p-10 space-y-8">
+
+                {% csrf_token %}
+
+                <!-- Username -->
+
+                <div>
+
+                    <label class="block text-white font-semibold mb-2">
+                        Username
+                    </label>
+
+                    <input
+                        type="text"
+                        name="username"
+                        placeholder="Enter Username"
+                        required
+                        class="w-full rounded-xl bg-white/20 border border-white/30 text-white placeholder-blue-100 px-4 py-3 outline-none focus:ring-2 focus:ring-sky-300">
+
+                </div>
+
+                <!-- Name -->
+
+                <div class="grid md:grid-cols-2 gap-6">
+
+                    <div>
+
+                        <label class="block text-white font-semibold mb-2">
+                            First Name
+                        </label>
+
+                        <input
+                            type="text"
+                            name="first_name"
+                            placeholder="First Name"
+                            required
+                            class="w-full rounded-xl bg-white/20 border border-white/30 text-white placeholder-blue-100 px-4 py-3 outline-none focus:ring-2 focus:ring-sky-300">
+
+                    </div>
+
+                    <div>
+
+                        <label class="block text-white font-semibold mb-2">
+                            Last Name
+                        </label>
+
+                        <input
+                            type="text"
+                            name="last_name"
+                            placeholder="Last Name"
+                            required
+                            class="w-full rounded-xl bg-white/20 border border-white/30 text-white placeholder-blue-100 px-4 py-3 outline-none focus:ring-2 focus:ring-sky-300">
+
+                    </div>
+
+                </div>
+
+                <!-- Email & Phone -->
+
+                <div class="grid md:grid-cols-2 gap-6">
+
+                    <div>
+
+                        <label class="block text-white font-semibold mb-2">
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="Email Address"
+                            required
+                            class="w-full rounded-xl bg-white/20 border border-white/30 text-white placeholder-blue-100 px-4 py-3 outline-none focus:ring-2 focus:ring-sky-300">
+
+                    </div>
+
+                    <div>
+
+                        <label class="block text-white font-semibold mb-2">
+                            Mobile Number
+                        </label>
+
+                        <input
+                            type="number"
+                            name="phone"
+                            placeholder="Mobile Number"
+                            required
+                            class="w-full rounded-xl bg-white/20 border border-white/30 text-white placeholder-blue-100 px-4 py-3 outline-none focus:ring-2 focus:ring-sky-300">
+
+                    </div>
+
+                </div>
+
+                <!-- Branch & Class -->
+
+                <div class="grid md:grid-cols-2 gap-6">
+
+                    <div>
+
+                        <label class="block text-white font-semibold mb-2">
+                            Branch
+                        </label>
+
+                        <input
+                            type="text"
+                            name="branch"
+                            placeholder="Branch Name"
+                            required
+                            class="w-full rounded-xl bg-white/20 border border-white/30 text-white placeholder-blue-100 px-4 py-3 outline-none focus:ring-2 focus:ring-sky-300">
+
+                    </div>
+
+                    <div>
+
+                        <label class="block text-white font-semibold mb-2">
+                            Classroom
+                        </label>
+
+                        <input
+                            type="text"
+                            name="classroom"
+                            placeholder="Class Name"
+                            required
+                            class="w-full rounded-xl bg-white/20 border border-white/30 text-white placeholder-blue-100 px-4 py-3 outline-none focus:ring-2 focus:ring-sky-300">
+
+                    </div>
+
+                </div>
+
+                <!-- Roll & Image -->
+
+                <div class="grid md:grid-cols-2 gap-6">
+
+                    <div>
+
+                        <label class="block text-white font-semibold mb-2">
+                            Roll Number
+                        </label>
+
+                        <input
+                            type="text"
+                            name="roll_no"
+                            placeholder="Roll Number"
+                            required
+                            class="w-full rounded-xl bg-white/20 border border-white/30 text-white placeholder-blue-100 px-4 py-3 outline-none focus:ring-2 focus:ring-sky-300">
+
+                    </div>
+
+                    <div>
+
+                        <label class="block text-white font-semibold mb-2">
+                            Student Image
+                        </label>
+
+                        <input
+                            type="file"
+                            name="image"
+                            required
+                            class="w-full rounded-xl bg-white/20 border border-white/30 text-white file:bg-blue-600 file:text-white file:border-0 file:px-4 file:py-2 file:rounded-lg">
+
+                    </div>
+
+                </div>
+
+                <!-- Password -->
+
+                <div class="grid md:grid-cols-2 gap-6">
+
+                    <div>
+
+                        <label class="block text-white font-semibold mb-2">
+                            Password
+                        </label>
+
+                        <input
+                            type="password"
+                            name="password"
+                            placeholder="Password"
+                            required
+                            class="w-full rounded-xl bg-white/20 border border-white/30 text-white placeholder-blue-100 px-4 py-3 outline-none focus:ring-2 focus:ring-sky-300">
+
+                    </div>
+
+                    <div>
+
+                        <label class="block text-white font-semibold mb-2">
+                            Confirm Password
+                        </label>
+
+                        <input
+                            type="password"
+                            name="confirm_password"
+                            placeholder="Confirm Password"
+                            required
+                            class="w-full rounded-xl bg-white/20 border border-white/30 text-white placeholder-blue-100 px-4 py-3 outline-none focus:ring-2 focus:ring-sky-300">
+
+                    </div>
+
+                </div>
+
+                <!-- Button -->
+
+                <div class="pt-4">
+
+                    <button
+                        type="submit"
+                        class="w-full md:w-auto px-10 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-sky-400 text-white font-semibold shadow-lg hover:scale-105 transition duration-300">
+
+                        Register as Student
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
+
+{% block js %}
+
+<script>
+
+{% if alert %}
+
+alert("Registration Successful!");
+
+window.location.href="/student_login/";
+
+{% endif %}
+
+</script>
+
+{% endblock %}

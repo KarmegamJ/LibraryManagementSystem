@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        lexend: ['Lexend', 'sans-serif']
+                    },
+                    colors: {
+                        primary: "#1E3A8A",
+                        secondary: "#2563EB",
+                        accent: "#60A5FA",
+                        light: "#DBEAFE"
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- DataTables -->
+    <link rel="stylesheet"
+        href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css">
+
+    {% block css %}{% endblock %}
+</head>
+
+<body class="font-lexend bg-slate-100">
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="sticky top-0 z-50 backdrop-blur-xl bg-gradient-to-r from-[#0F172A] via-[#1E3A8A] to-[#60A5FA] shadow-xl">
+
+    <div class="max-w-7xl mx-auto px-6">
+
+        <div class="flex justify-between items-center h-20">
+
+            <!-- Logo -->
+
+            <a href="/"
+                class="text-2xl font-extrabold text-white tracking-wide">
+
+                📚 LibraryMS
+
+            </a>
+
+            <!-- Desktop Menu -->
+
+            <div class="hidden lg:flex items-center gap-8">
+
+                <a href="/change_password/"
+                    class="text-white hover:text-blue-200 transition">
+                    Change Password
+                </a>
+
+                <a href="/profile/"
+                    class="text-white hover:text-blue-200 transition">
+                    Profile
+                </a>
+
+                <a href="/student_issued_books/"
+                    class="text-white hover:text-blue-200 transition">
+                    Issued Books
+                </a>
+
+                <a href="/logout/"
+                    class="px-5 py-2 rounded-xl bg-red-500 hover:bg-red-600 text-white transition">
+
+                    Logout
+
+                </a>
+
+            </div>
+
+            <!-- User -->
+
+            <div class="hidden xl:flex">
+
+                <div
+                    class="px-5 py-2 rounded-full bg-white/20 backdrop-blur-lg border border-white/20 text-white">
+
+                    👋 Welcome,
+                    <span class="font-semibold">
+                        {{ request.user }}
+                    </span>
+
+                </div>
+
+            </div>
+
+            <!-- Mobile Button -->
+
+            <button id="menuBtn"
+                class="lg:hidden text-white">
+
+                <svg xmlns="http://www.w3.org/2000/svg"
+                    class="h-8 w-8"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor">
+
+                    <path stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4 6h16M4 12h16M4 18h16"/>
+
+                </svg>
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- Mobile Menu -->
+
+    <div id="mobileMenu"
+        class="hidden lg:hidden bg-[#0F172A]/95 backdrop-blur-xl">
+
+        <div class="flex flex-col p-6 gap-5">
+
+            <a href="/change_password/"
+                class="text-white hover:text-blue-300">
+
+                Change Password
+
+            </a>
+
+            <a href="/profile/"
+                class="text-white hover:text-blue-300">
+
+                Profile
+
+            </a>
+
+            <a href="/student_issued_books/"
+                class="text-white hover:text-blue-300">
+
+                Issued Books
+
+            </a>
+
+            <a href="/logout/"
+                class="text-red-400 hover:text-red-300">
+
+                Logout
+
+            </a>
+
+            <div
+                class="mt-4 rounded-xl bg-white/10 p-3 text-white">
+
+                Welcome {{ request.user }}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</nav>
+
+<!-- ================= PAGE CONTENT ================= -->
+
+<main>
+
+{% block body %}
+{% endblock %}
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+
+<footer
+class="bg-gradient-to-r from-[#0F172A] via-[#1E3A8A] to-[#2563EB] text-white mt-20">
+
+    <div class="max-w-7xl mx-auto py-8 px-6">
+
+        <div class="text-center">
+
+            <h2 class="text-2xl font-bold">
+                Library Management System
+            </h2>
+
+            <p class="text-blue-200 mt-3">
+                Smart, Secure & Modern Digital Library Platform
+            </p>
+
+            <p class="mt-6 text-sm text-blue-100">
+                © 2026 Library Management System.
+                All Rights Reserved.
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+<!-- JQuery -->
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<!-- DataTables -->
+
+<script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+
+<script>
+
+const menuBtn = document.getElementById("menuBtn");
+const mobileMenu = document.getElementById("mobileMenu");
+
+menuBtn.addEventListener("click",()=>{
+
+mobileMenu.classList.toggle("hidden");
+
+});
+
+</script>
+
+{% block js %}
+
+<script>
+
+$(document).ready(function () {
+
+if ($("#example").length){
+
+$("#example").DataTable();
+
+}
+
+});
+
+</script>
+
+{% endblock %}
+
+</body>
+</html>
