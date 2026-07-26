@@ -3,5 +3,6 @@ pip freeze > requirements.txt
 Django
 gunicorn
 whitenoise
-mysqlclient
+pymysql
 python-dotenv
+mysqlclient

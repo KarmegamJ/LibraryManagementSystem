@@ -2,14 +2,14 @@
   "version": 2,
   "builds": [
     {
-      "src": "library_management/wsgi.py",
+      "src": "LibraryManagementSystem/wsgi.py",
       "use": "@vercel/python"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "library_management/wsgi.py"
+      "dest": "LibraryManagementSystem/wsgi.py"
     }
   ]
 }
