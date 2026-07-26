@@ -1,0 +1,89 @@
+{% extends 'student_navbar.html' %} 
+
+{% block title %} Profile {% endblock %} 
+
+
+
+
+
+
+{% block body %}
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="min-h-screen bg-blue-50 py-10 px-5">
+  <div
+    class="max-w-5xl mx-auto bg-white rounded-[2rem] shadow-xl p-8 border border-blue-100"
+  >
+    <div class="grid md:grid-cols-3 gap-10 items-center">
+      <!-- Profile Image -->
+      <div class="flex justify-center">
+        <img
+          src="{{ user.student.image.url }}"
+          alt="Profile"
+          class="w-72 h-72 object-cover rounded-[2rem] border-4 border-blue-100 shadow-lg"
+        />
+      </div>
+
+      <!-- Profile Details -->
+      <div class="md:col-span-2 space-y-4">
+        <div class="flex justify-between bg-blue-50 rounded-2xl px-5 py-3">
+          <label class="font-semibold text-blue-700">ID:</label>
+          <p>{{ user.id }}</p>
+        </div>
+
+        <div class="flex justify-between bg-blue-50 rounded-2xl px-5 py-3">
+          <label class="font-semibold text-blue-700">Username:</label>
+          <p>{{ user }}</p>
+        </div>
+
+        <div class="flex justify-between bg-blue-50 rounded-2xl px-5 py-3">
+          <label class="font-semibold text-blue-700">Full Name:</label>
+          <p>{{ user.get_full_name }}</p>
+        </div>
+
+        <div class="flex justify-between bg-blue-50 rounded-2xl px-5 py-3">
+          <label class="font-semibold text-blue-700">Email:</label>
+          <p>{{ user.email }}</p>
+        </div>
+
+        <div class="flex justify-between bg-blue-50 rounded-2xl px-5 py-3">
+          <label class="font-semibold text-blue-700">Phone Number:</label>
+          <p>{{ user.student.phone }}</p>
+        </div>
+
+        <div class="flex justify-between bg-blue-50 rounded-2xl px-5 py-3">
+          <label class="font-semibold text-blue-700">Branch:</label>
+          <p>{{ user.student.branch }}</p>
+        </div>
+
+        <div class="flex justify-between bg-blue-50 rounded-2xl px-5 py-3">
+          <label class="font-semibold text-blue-700">Class:</label>
+          <p>{{ user.student.classroom }}</p>
+        </div>
+
+        <div class="flex justify-between bg-blue-50 rounded-2xl px-5 py-3">
+          <label class="font-semibold text-blue-700">Roll Number:</label>
+          <p>{{ user.student.roll_no }}</p>
+        </div>
+
+        <a
+          href="/edit_profile/"
+          class="inline-block mt-5 px-8 py-3 rounded-full bg-blue-600 text-white font-semibold hover:bg-blue-700 transition"
+        >
+          Edit Profile
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

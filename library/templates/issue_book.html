@@ -1,30 +1,73 @@
-{% extends 'admin_navbar.html' %}
-{% load static %}
-{% block title %} Issue Book {% endblock %}
-{% block css %}
-{% endblock %}
-{% block body %}
-<div class="container mt-4">
-    <form method="POST"> {% csrf_token %}
-        {% for i in form %}
-        <div class="form-group">
-            <br>
-          <label class="control-label col-xs-4">{{ i.label_tag }}</label>
-          <div class="col-xs-8 mt-2">
-          {{ i }}
-           </div>
-        </div>
-        {% endfor %}
-    <button type="submit" class="btn btn-outline-primary mt-4">Issue Book</button>
-</div>
-</form>
-{% endblock %}
-{% block js %}
-<script>
-    {% if alert %}
-    alert("Book Successfully Issued.")
-    document.location = "/issue_book"
-    {% endif %}
-</script>
-{% endblock %}
+{% extends 'admin_navbar.html' %} {% load static %} {% block title %} Issue Book
+{% endblock %} {% block css %} {% endblock %} {% block body %}
 
+<section class="min-h-screen bg-blue-50 py-12 px-5">
+  <div class="max-w-3xl mx-auto">
+    <!-- Card -->
+
+    <div
+      class="bg-white rounded-[2rem] shadow-xl border border-blue-100 p-8 md:p-10"
+    >
+      <!-- Header -->
+
+      <div class="text-center mb-10">
+        <div
+          class="w-20 h-20 mx-auto flex items-center justify-center rounded-full bg-blue-100 text-blue-600 text-4xl mb-5"
+        >
+          📚
+        </div>
+
+        <h1 class="text-3xl md:text-4xl font-bold text-blue-700">Issue Book</h1>
+
+        <p class="text-gray-500 mt-3">
+          Assign books to students through the library system
+        </p>
+      </div>
+
+      <form method="POST">
+        {% csrf_token %} {% for i in form %}
+
+        <div class="mb-6">
+          <!-- Label -->
+
+          <label class="block text-blue-700 font-semibold mb-2">
+            {{ i.label_tag }}
+          </label>
+
+          <!-- Django Input -->
+
+          <div class="mt-2">{{ i }}</div>
+        </div>
+
+        {% endfor %}
+
+        <!-- Button -->
+
+        <div class="text-center mt-10">
+          <button
+            type="submit"
+            class="px-10 py-3 rounded-full bg-blue-600 text-white font-semibold shadow-lg hover:bg-blue-700 hover:scale-105 transition duration-300"
+          >
+            Issue Book
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+{% endblock %} {% block js %}
+
+<script>
+
+
+  {% if alert %}
+
+  alert("Book Successfully Issued.")
+
+  document.location = "/issue_book"
+
+  {% endif %}
+</script>
+
+{% endblock %}

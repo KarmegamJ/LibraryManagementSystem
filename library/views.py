@@ -145,10 +145,10 @@ def student_issued_books(request):
 
 @login_required(login_url = '/student_login')
 def profile(request):
-    return render(request, "profile.html")
+    return render(request, "profile.djhtml")
 
 @login_required(login_url = '/student_login')
-def edit_profile(request):
+def edit_profile(request):  
     student = Student.objects.get(user=request.user)
     if request.method == "POST":
         email = request.POST['email']

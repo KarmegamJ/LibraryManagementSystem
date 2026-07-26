@@ -1,40 +1,90 @@
-{% extends 'student_navbar.html' %}
-{% load static %}
-{% block title %} All Students List {% endblock %}
-{% block css %}
-{% endblock %}
-{% block body %}
-<div class="container mt-4">
-    <h1 class="text-center"><u>All Issued Books</u></h1>
-    <table class="table table-hover" id="example">
-        <thead>
+{% extends 'student_navbar.html' %} {% load static %} {% block title %} All
+Issued Books {% endblock %} {% block css %} {% endblock %} {% block body %}
+
+<section class="min-h-screen bg-blue-50 py-12 px-5">
+  <div class="max-w-7xl mx-auto">
+    <!-- Card -->
+
+    <div
+      class="bg-white rounded-[2rem] shadow-xl border border-blue-100 p-6 md:p-10"
+    >
+      <!-- Header -->
+
+      <div class="text-center mb-10">
+        <div
+          class="w-20 h-20 mx-auto flex items-center justify-center rounded-full bg-blue-100 text-blue-600 text-4xl mb-5"
+        >
+          📚
+        </div>
+
+        <h1 class="text-3xl md:text-4xl font-bold text-blue-700">
+          All Issued Books
+        </h1>
+
+        <p class="text-gray-500 mt-3">
+          View your currently issued books and fine details
+        </p>
+      </div>
+
+      <!-- Table Wrapper -->
+
+      <div class="overflow-x-auto rounded-2xl border border-blue-100">
+        <table id="example" class="min-w-full text-sm text-left text-gray-700">
+          <!-- Table Head -->
+
+          <thead class="bg-blue-600 text-white">
             <tr class="text-center">
-                <th>Sr.No</th>
-                <th>Student ID</th>
-                <th>Student Name</th>
-                <th>Book Name</th>
-                <th>Author</th>
-                <th>Issued Date</th>
-                <th>Expiry Date</th>
-                <th>Fine</th>
+              <th class="px-6 py-4 font-semibold">Sr.No</th>
+
+              <th class="px-6 py-4 font-semibold">Student ID</th>
+
+              <th class="px-6 py-4 font-semibold">Student Name</th>
+
+              <th class="px-6 py-4 font-semibold">Book Name</th>
+
+              <th class="px-6 py-4 font-semibold">Author</th>
+
+              <th class="px-6 py-4 font-semibold">Issued Date</th>
+
+              <th class="px-6 py-4 font-semibold">Expiry Date</th>
+
+              <th class="px-6 py-4 font-semibold">Fine</th>
             </tr>
-        </thead>
-        <tbody>
+          </thead>
+
+          <!-- Table Body -->
+
+          <tbody>
             {% for i in li1 %}
-            <tr class="text-center">
-                <td>{{forloop.counter}}.</td>
-                <td>{{i.0}}</td>
-                <td>{{i.1}}</td>
-                <td>{{i.2}}</td>
-                <td>{{i.3}}</td>
-                {% endfor %}
-                {% for i in li2 %}
-                <td>{{i.0}}</td>
-                <td>{{i.1}}</td>
-                <td>₹ {{i.2}}</td>
+
+            <tr
+              class="text-center border-b border-blue-100 hover:bg-blue-50 transition"
+            >
+              <td class="px-6 py-4">{{forloop.counter}}.</td>
+
+              <td class="px-6 py-4">{{i.0}}</td>
+
+              <td class="px-6 py-4 font-medium text-blue-700">{{i.1}}</td>
+
+              <td class="px-6 py-4">{{i.2}}</td>
+
+              <td class="px-6 py-4">{{i.3}}</td>
+
+              {% endfor %} {% for i in li2 %}
+
+              <td class="px-6 py-4">{{i.0}}</td>
+
+              <td class="px-6 py-4">{{i.1}}</td>
+
+              <td class="px-6 py-4 font-semibold text-blue-600">₹ {{i.2}}</td>
             </tr>
+
             {% endfor %}
-        </tbody>
-    </table>
+          </tbody>
+        </table>
+      </div>
     </div>
+  </div>
+</section>
+
 {% endblock %}

@@ -1,47 +1,124 @@
-{% extends 'admin_navbar.html' %}
-{% load static %}
-{% block title %} Library Management System {% endblock %}
-{% block css %}
-{% endblock %}
-{% block body %}
-<div class="container">
-    <form method="POST"> {% csrf_token %}
-    <div class="row mt-4">
-        <div class="form-group col-md-12">
-            <label><i style="font-weight: bold;">Book Name</i></label>
-            <input type="text" class="form-control mt-2" name="name" placeholder="Enter name of the Book" required>
-        </div>
-    </div>
+{% extends 'admin_navbar.html' %} {% load static %} {% block title %} Library
+Management System {% endblock %} {% block css %} {% endblock %} {% block body %}
 
-    <div class="row mt-4">
-        <div class="form-group col-md-12">
-            <label><i style="font-weight: bold;">Author Name</i></label>
-            <input type="text" class="form-control mt-2" name="author" placeholder="Enter name of the Author" required>
-        </div>
-    </div>
+<section class="min-h-screen bg-blue-50 py-12 px-6">
+  <div class="max-w-3xl mx-auto">
+    <!-- Card -->
 
-    <div class="row mt-4">
-        <div class="form-group col-md-12">
-            <label><i style="font-weight: bold;">ISBN Number</i></label>
-            <input type="number" class="form-control mt-2" name="isbn" placeholder="Enter ISBN number of the book" required>
-        </div>
-    </div>
+    <div
+      class="bg-white rounded-[2rem] shadow-xl border border-blue-100 p-8 md:p-10"
+    >
+      <!-- Header -->
 
-    <div class="row mt-4">
-        <div class="form-group col-md-12">
-            <label><i style="font-weight: bold;">Category</i></label>
-            <input type="text" class="form-control mt-2" name="category" placeholder="Enter Category of the book" required>
+      <div class="text-center mb-10">
+        <div
+          class="w-20 h-20 mx-auto rounded-full bg-blue-100 flex items-center justify-center text-4xl mb-5"
+        >
+          📚
         </div>
+
+        <h1 class="text-3xl md:text-4xl font-extrabold text-blue-800">
+          Add New Book
+        </h1>
+
+        <p class="text-gray-500 mt-3">
+          Add book details to the library collection
+        </p>
+      </div>
+
+      <!-- Form -->
+
+      <form method="POST">
+        {% csrf_token %}
+
+        <!-- Book Name -->
+
+        <div class="mb-6">
+          <label class="block text-blue-800 font-semibold mb-2">
+            Book Name
+          </label>
+
+          <input
+            type="text"
+            name="name"
+            placeholder="Enter name of the Book"
+            required
+            class="w-full px-5 py-3 rounded-2xl border border-blue-200 bg-blue-50 text-gray-700 placeholder-gray-400 outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition duration-300"
+          />
+        </div>
+
+        <!-- Author Name -->
+
+        <div class="mb-6">
+          <label class="block text-blue-800 font-semibold mb-2">
+            Author Name
+          </label>
+
+          <input
+            type="text"
+            name="author"
+            placeholder="Enter name of the Author"
+            required
+            class="w-full px-5 py-3 rounded-2xl border border-blue-200 bg-blue-50 text-gray-700 placeholder-gray-400 outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition duration-300"
+          />
+        </div>
+
+        <!-- ISBN Number -->
+
+        <div class="mb-6">
+          <label class="block text-blue-800 font-semibold mb-2">
+            ISBN Number
+          </label>
+
+          <input
+            type="number"
+            name="isbn"
+            placeholder="Enter ISBN number of the book"
+            required
+            class="w-full px-5 py-3 rounded-2xl border border-blue-200 bg-blue-50 text-gray-700 placeholder-gray-400 outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition duration-300"
+          />
+        </div>
+
+        <!-- Category -->
+
+        <div class="mb-8">
+          <label class="block text-blue-800 font-semibold mb-2">
+            Category
+          </label>
+
+          <input
+            type="text"
+            name="category"
+            placeholder="Enter Category of the book"
+            required
+            class="w-full px-5 py-3 rounded-2xl border border-blue-200 bg-blue-50 text-gray-700 placeholder-gray-400 outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition duration-300"
+          />
+        </div>
+
+        <!-- Button -->
+
+        <button
+          type="submit"
+          class="w-full py-3 rounded-2xl bg-gradient-to-r from-blue-700 to-blue-400 text-white font-semibold text-lg shadow-lg hover:scale-105 hover:shadow-blue-300 transition duration-300"
+        >
+          Add Book
+        </button>
+      </form>
     </div>
-    <button type="submit" class="btn btn-outline-primary mt-4">Add Book</button>
-</div>
-</form>
-{% endblock %}
-{% block js %}
+  </div>
+</section>
+
+{% endblock %} {% block js %}
+
 <script>
-    {% if alert %}
-    alert("Book is added successfully.")
-    document.location = "/view_books"
-    {% endif %}
+
+  {% if alert %}
+
+  alert("Book is added successfully.");
+
+  window.location.href="/view_books/";
+
+  {% endif %}
 </script>
+
 {% endblock %}
