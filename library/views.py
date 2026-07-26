@@ -1,13 +1,15 @@
 from django.shortcuts import render
 
-from library.forms import IssueBookForm
-from django.shortcuts import redirect, render,HttpResponse
-from .models import *
-from .forms import IssueBookForm
-from django.contrib.auth import authenticate, login, logout
-from . import forms, models
 from datetime import date
+
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, redirect, render
+
+from .forms import IssueBookForm
+from .models import Book, IssuedBook, Student
 
 def index(request):
     return render(request, "index.html")
@@ -36,19 +38,29 @@ def view_students(request):
     students = Student.objects.all()
     return render(request, "view_students.html", {'students':students})
 
-@login_required(login_url = '/admin_login')
+@login_required(login_url="/admin_login")
 def issue_book(request):
-    form = forms.IssueBookForm()
+    form = IssueBookForm()
+
     if request.method == "POST":
-        form = forms.IssueBookForm(request.POST)
+        form = IssueBookForm(request.POST)
+
         if form.is_valid():
-            obj = models.IssuedBook()
-            obj.student_id = request.POST['name2']
-            obj.isbn = request.POST['isbn2']
-            obj.save()
-            alert = True
-            return render(request, "issue_book.html", {'obj':obj, 'alert':alert})
-    return render(request, "issue_book.html", {'form':form})
+            IssuedBook.objects.create(
+                student_id=form.cleaned_data["name2"],
+                isbn=form.cleaned_data["isbn2"],
+            )
+
+            return render(
+                request,
+                "issue_book.html",
+                {
+                    "form": IssueBookForm(),
+                    "alert": True,
+                },
+            )
+
+    return render(request, "issue_book.html", {"form": form})
 
 @login_required(login_url='/admin_login')
 def view_issued_book(request):
@@ -84,28 +96,52 @@ def view_issued_book(request):
             "details": details,
         },
     )
-@login_required(login_url = '/student_login')
+@login_required(login_url="/student_login")
 def student_issued_books(request):
-    student = Student.objects.filter(user_id=request.user.id)
-    issuedBooks = IssuedBook.objects.filter(student_id=student[0].user_id)
+    student = Student.objects.filter(user=request.user).first()
+
+    if not student:
+        return render(
+            request,
+            "student_issued_books.html",
+            {"li1": [], "li2": []},
+        )
+
+    issued_books = IssuedBook.objects.filter(student_id=student.user_id)
+
     li1 = []
     li2 = []
 
-    for i in issuedBooks:
-        books = Book.objects.filter(isbn=i.isbn)
-        for book in books:
-            t=(request.user.id, request.user.get_full_name, book.name,book.author)
-            li1.append(t)
+    for issued in issued_books:
+        book = Book.objects.filter(isbn=issued.isbn).first()
 
-        days=(date.today()-i.issued_date)
-        d=days.days
-        fine=0
-        if d>15:
-            day=d-14
-            fine=day*5
-        t=(issuedBooks[0].issued_date, issuedBooks[0].expiry_date, fine)
-        li2.append(t)
-    return render(request,'student_issued_books.html',{'li1':li1, 'li2':li2})
+        if book:
+            li1.append(
+                (
+                    request.user.id,
+                    request.user.get_full_name(),
+                    book.name,
+                    book.author,
+                )
+            )
+
+        days = (date.today() - issued.issued_date).days
+        fine = max(0, (days - 14) * 5)
+
+        li2.append(
+            (
+                issued.issued_date,
+                issued.expiry_date,
+                fine,
+            )
+        )
+
+    return render(
+        request,
+        "student_issued_books.html",
+        {"li1": li1, "li2": li2},
+    )
+
 
 @login_required(login_url = '/student_login')
 def profile(request):
@@ -144,20 +180,27 @@ def delete_student(request, myid):
 
 def change_password(request):
     if request.method == "POST":
-        current_password = request.POST['current_password']
-        new_password = request.POST['new_password']
-        try:
-            u = User.objects.get(id=request.user.id)
-            if u.check_password(current_password):
-                u.set_password(new_password)
-                u.save()
-                alert = True
-                return render(request, "change_password.html", {'alert':alert})
-            else:
-                currpasswrong = True
-                return render(request, "change_password.html", {'currpasswrong':currpasswrong})
-        except:
-            pass
+        current_password = request.POST["current_password"]
+        new_password = request.POST["new_password"]
+
+        user = request.user
+
+        if user.check_password(current_password):
+            user.set_password(new_password)
+            user.save()
+
+            return render(
+                request,
+                "change_password.html",
+                {"alert": True},
+            )
+
+        return render(
+            request,
+            "change_password.html",
+            {"currpasswrong": True},
+        )
+
     return render(request, "change_password.html")
 
 def student_registration(request):
@@ -170,7 +213,7 @@ def student_registration(request):
         branch = request.POST['branch']
         classroom = request.POST['classroom']
         roll_no = request.POST['roll_no']
-        image = request.FILES['image']
+        image = request.FILES.get("image")
         password = request.POST['password']
         confirm_password = request.POST['confirm_password']
 
