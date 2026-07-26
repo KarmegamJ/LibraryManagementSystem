@@ -1,8 +1,6 @@
-pip freeze > requirements.txt
-
-Django
-gunicorn
-whitenoise
-pymysql
-python-dotenv
-mysqlclient
+Django==5.2.16
+gunicorn==23.0.0
+whitenoise==6.9.0
+PyMySQL==1.1.1
+python-dotenv==1.1.1
+mysqlclient==2.2.7
